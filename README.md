@@ -1,24 +1,8 @@
-# README
+# Calculator web-service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A service that works like a calculator using GET requests.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## The service accepts an arithmetic expression added to the request: "http://calculator?expression=3*4"
+## The service responds in JSON as follows:
+expression :[echo given expression]
+result     :[computed result of given expression]
