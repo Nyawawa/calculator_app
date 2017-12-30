@@ -1,6 +1,6 @@
 # Calculator web-service
 
-The calculator_app is a service that works like a calculator using GET requests.
+The calculator_app is a web-service build with ruby on rails that works like a calculator using GET requests.
 
 An expression forwarded as argument by a GET request is evaluated using the following grammar:
 ```
