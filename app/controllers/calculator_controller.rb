@@ -13,7 +13,7 @@ class CalculatorController < ApplicationController
       puts "########## calling evaluateExpression ..."
       @calculator.evaluate_expression
       puts "########## evaluateExpression done!"
-      render :json => @calculator, :only => [:expression, :result]
+      render :json => @calculator
     else
       render :json => {expression: expressionString, result: "Blank Expression"}
     end
