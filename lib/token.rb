@@ -3,6 +3,7 @@ class Token
   Minus     = 1
   Multiply  = 2
   Divide    = 3
+  Modulo    = 9
 
   Number    = 4
 
@@ -12,6 +13,7 @@ class Token
   End       = 7
 
   Exponent  = 8
+  
   
   
 

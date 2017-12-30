@@ -19,7 +19,7 @@ class Parser
 
   protected
   AdditiveOperators = [Token::Plus, Token::Minus]
-  MultiplicativeOperators = [Token::Multiply, Token::Divide]
+  MultiplicativeOperators = [Token::Multiply, Token::Divide, Token::Modulo]
   
   # this method evaluates 'factor [{("+" | "-") factor}]'
   def expression
@@ -52,8 +52,10 @@ class Parser
 
       if token.get_kind_name == Token::Multiply
         factor1 *= factor2
-      else
+      elsif token.get_kind_name == Token::Divide
         factor1 /= factor2
+      else
+        factor1 %= factor2
       end
 
       token = @lexer.get_next_token

@@ -35,8 +35,9 @@ class Lexer
       when '' # empty string
         token.set_kind_name Token::End
       when /\A\^/
-        puts "########## found ^"
         token.set_kind_name Token::Exponent
+      when /\Amod/
+        token.set_kind_name Token::Modulo
     end
     puts "########## " + @input.to_s
     raise 'Unknown Token' if token.unknown?
