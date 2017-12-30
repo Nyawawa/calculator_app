@@ -67,7 +67,6 @@ class Parser
   # this method evaluates '(Token::Number | "(" expression ")" | "sqrt" number) [{"^" number}]'
   def number
     token = @lexer.get_next_token
-
     if token.get_kind == Token::LBracket # new sub-expression
       value = expression()
       expected_rbracket = @lexer.get_next_token
@@ -100,6 +99,10 @@ class Parser
   # this method calculates the square root of a Number returned by number()
   def square_root
     value = number()
-    squroot = Math.sqrt(value)
+    if value >= 0
+      squroot = Math.sqrt(value)
+    else
+      raise 'Sqrt of Negative Number'
+    end
   end
 end

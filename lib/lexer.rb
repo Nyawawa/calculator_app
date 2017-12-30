@@ -19,15 +19,15 @@ class Lexer
     case @input
       when /\A\+/ then # string "+"
         token.set_kind Token::Plus
+      when /\A(-)?\d+(\.\d+)?/ # string "1.2" (d.d)
+        token.set_kind Token::Number
+        token.set_value $&.to_f # store the number (the last successful pattern match) as float 
       when /\A-/ then # string "-"
         token.set_kind Token::Minus
       when /\A\*/ then # string "*"
         token.set_kind Token::Multiply
       when /\A\// then # string "/"
         token.set_kind Token::Divide
-      when /\A\d+(\.\d+)?/ # string "1.2" (d.d)
-        token.set_kind Token::Number
-        token.set_value $&.to_f # store the number (the last successful pattern match) as float 
       when /\A\(/ # string "("
         token.set_kind Token::LBracket
       when /\A\)/ # string ")"
