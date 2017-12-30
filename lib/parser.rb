@@ -4,7 +4,6 @@ require 'token'
 class Parser
 
   def parse(input)
-    puts "########## start parse"
     @lexer = Lexer.new(input)
 
     result = expression()

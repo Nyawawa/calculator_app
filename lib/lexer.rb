@@ -42,7 +42,6 @@ class Lexer
         token.set_kind_name Token::SquRoot
         
     end
-    puts "########## " + @input.to_s
     raise 'Unknown Token' if token.unknown?
     @input = $' #keep only the part of the expression after the actual string of the previous successful pattern match 
 

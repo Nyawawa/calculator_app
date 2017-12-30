@@ -1,18 +1,11 @@
 class CalculatorController < ApplicationController
   def calculate
-    puts "########## received expression: " + params[:expression]
-    puts "########## start http header"
-    puts request.original_url
+    # using params[] "+" is replaced by " " so the original URL must be retrieved and parsed
     queryString    = URI.parse(request.original_url).query
-    pp queryString
-    expressionString = queryString.split("=")[1] # the service only exprects one argument set, so the second part of the string should be the expression 
-    puts "########## expression " + expressionString
-    puts "########## end http header"
+    expressionString = queryString.split("=")[1] # the service only exprects one argument, so the second part of the string should be the expression 
     @calculator = Calculator.new(:expression => expressionString)
     if @calculator.save
-      puts "########## calling evaluateExpression ..."
       @calculator.evaluate_expression
-      puts "########## evaluateExpression done!"
       render :json => @calculator
     else
       render :json => {expression: expressionString, result: "Error: Blank Expression"}
