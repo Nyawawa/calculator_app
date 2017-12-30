@@ -13,6 +13,7 @@ class Token
   End       = 7
 
   Exponent  = 8
+  SquRoot   = 10
   
   
   

@@ -75,6 +75,8 @@ class Parser
       raise 'Unbalanced Bracket' unless expected_rbracket.kind_name == Token::RBracket
     elsif token.get_kind_name == Token::Number
       value = token.get_value
+    elsif token.get_kind_name == Token::SquRoot
+      value = square_root()
     else
       raise 'Not a Number'
     end
@@ -93,5 +95,10 @@ class Parser
     end
     
     value
+  end
+  
+  def square_root
+    value = number()
+    squroot = Math.sqrt(value)
   end
 end
