@@ -3,8 +3,8 @@ class CalculatorController < ApplicationController
     # using params[] "+" is replaced by " " so the original URL must be retrieved and parsed
     queryString    = URI.parse(request.original_url).query
     expressionString = queryString.split("=")[1] # the service only exprects one argument, so the second part of the string should be the expression 
-    @calculator = Calculator.new(:expression => expressionString)
-    if @calculator.save
+    if !expressionString.blank?
+      @calculator = Calculator.new(:expression => expressionString)
       @calculator.evaluate_expression
       render :json => @calculator
     else

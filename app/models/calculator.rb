@@ -2,9 +2,7 @@ class Calculator < ApplicationRecord
   require 'parser'
   
   attr_accessor :result
-  validates :expression, presence: true, allow_blank: false
-  
-  
+
   def evaluate_expression
     parser = Parser.new
     begin
