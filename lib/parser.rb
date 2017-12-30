@@ -8,7 +8,7 @@ class Parser
 
     result = expression()
 
-    token = @lexer.get_next_token
+    token = @lexer.get_next_token false
     if token.get_kind == Token::End
       return result
     else
@@ -24,7 +24,7 @@ class Parser
   def expression
     component1 = factor()
 
-    token = @lexer.get_next_token
+    token = @lexer.get_next_token false
     while AdditiveOperators.include?(token.get_kind) # stay in the loop as long as there is another combination of '("+" | "-") factor'
       component2 = factor()
 
@@ -34,7 +34,7 @@ class Parser
         component1 -= component2
       end
 
-      token = @lexer.get_next_token
+      token = @lexer.get_next_token false
     end
     @lexer.revert # if last token received through get_next_token wasn't a MultiplicativeOperator it must be made available again
 
@@ -45,7 +45,7 @@ class Parser
   def factor
     factor1 = number()
 
-    token = @lexer.get_next_token
+    token = @lexer.get_next_token false
     while MultiplicativeOperators.include?(token.get_kind) # stay in the loop as long as there is another combination of '("*" | "/") number'
       factor2 = number()
 
@@ -57,7 +57,7 @@ class Parser
         factor1 %= factor2
       end
 
-      token = @lexer.get_next_token
+      token = @lexer.get_next_token false
     end
     @lexer.revert # if last token received through get_next_token wasn't a MultiplicativeOperator it must be made available again
 
@@ -66,10 +66,10 @@ class Parser
   
   # this method evaluates '(Token::Number | "(" expression ")" | "sqrt" number) [{"^" number}]'
   def number
-    token = @lexer.get_next_token
+    token = @lexer.get_next_token true
     if token.get_kind == Token::LBracket # new sub-expression
       value = expression()
-      expected_rbracket = @lexer.get_next_token
+      expected_rbracket = @lexer.get_next_token false
       raise 'Unbalanced Bracket' unless expected_rbracket.get_kind == Token::RBracket
     elsif token.get_kind == Token::Number
       value = token.get_value
@@ -83,7 +83,7 @@ class Parser
   
   # this method evalualtes 'Token::Number "^" number'
   def exponentiation base
-    token = @lexer.get_next_token
+    token = @lexer.get_next_token false
     
     if token.get_kind == Token::Exponent # new sub-expression
       exponent = number()

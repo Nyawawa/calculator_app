@@ -6,7 +6,7 @@ class Lexer
     @return_previous_token = false
   end
 
-  def get_next_token
+  def get_next_token awaitingNumber
     if @return_previous_token
       @return_previous_token = false
       return @previous_token
@@ -16,32 +16,37 @@ class Lexer
 
     @input.lstrip! # remove leading whitespace
 
-    case @input
-      when /\A\+/ then # string "+"
-        token.set_kind Token::Plus
-      when /\A(-)?\d+(\.\d+)?/ # string "1.2" (d.d)
-        token.set_kind Token::Number
-        token.set_value $&.to_f # store the number (the last successful pattern match) as float 
-      when /\A-/ then # string "-"
-        token.set_kind Token::Minus
-      when /\A\*/ then # string "*"
-        token.set_kind Token::Multiply
-      when /\A\// then # string "/"
-        token.set_kind Token::Divide
-      when /\A\(/ # string "("
-        token.set_kind Token::LBracket
-      when /\A\)/ # string ")"
-        token.set_kind Token::RBracket
-      when '' # empty string
-        token.set_kind Token::End
-      when /\A\^/ # string "^" 
-        token.set_kind Token::Exponent
-      when /\Amod/ # string "mod"
-        token.set_kind Token::Modulo
-      when /\Asqrt/ # string "sqrt"
-        token.set_kind Token::SquRoot
-        
+    if awaitingNumber # because negative numbers are allowed the check for numbers must be seperated from the minus operator
+      case @input
+        when /\A(-)?\d+(\.\d+)?/ # string "1.2" (d.d)
+          token.set_kind Token::Number
+          token.set_value $&.to_f # store the number (the last successful pattern match) as float
+        when /\A\(/ # string "("
+          token.set_kind Token::LBracket
+        when /\Asqrt/ # string "sqrt"
+          token.set_kind Token::SquRoot
+      end
+    else    
+      case @input
+        when /\A\+/ then # string "+"
+          token.set_kind Token::Plus
+        when /\A-/ then # string "-"
+          token.set_kind Token::Minus
+        when /\A\*/ then # string "*"
+          token.set_kind Token::Multiply
+        when /\A\// then # string "/"
+          token.set_kind Token::Divide
+        when /\A\)/ # string ")"
+          token.set_kind Token::RBracket
+        when '' # empty string
+          token.set_kind Token::End
+        when /\A\^/ # string "^" 
+          token.set_kind Token::Exponent
+        when /\Amod/ # string "mod"
+          token.set_kind Token::Modulo
+      end
     end
+
     raise 'Unknown Token' if token.unknown?
     @input = $' #keep only the part of the expression after the actual string of the previous successful pattern match 
 
