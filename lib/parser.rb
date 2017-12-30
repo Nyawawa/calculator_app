@@ -13,7 +13,7 @@ class Parser
     if token.get_kind_name == Token::End
       return result
     else
-      raise 'End expected'
+      raise 'End Expected'
     end
   end
 
@@ -70,11 +70,11 @@ class Parser
     if token.get_kind_name == Token::LBracket # new sub-expression
       value = expression()
       expected_rbracket = @lexer.get_next_token
-      raise 'Unbalanced bracket' unless expected_rbracket.kind_name == Token::RBracket
+      raise 'Unbalanced Bracket' unless expected_rbracket.kind_name == Token::RBracket
     elsif token.get_kind_name == Token::Number
       value = token.get_value
     else
-      raise 'Not a number'
+      raise 'Not a Number'
     end
 
     value

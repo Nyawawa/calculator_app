@@ -36,7 +36,7 @@ class Lexer
         token.set_kind_name Token::End
     end
 
-    raise 'Unknown token' if token.unknown?
+    raise 'Unknown Token' if token.unknown?
     @input = $' #keep only the part of the expression after the actual string of the previous successful pattern match 
 
     @previous_token = token

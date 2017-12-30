@@ -21,10 +21,10 @@ class Calculator < ApplicationRecord
   end
   
   def as_json options={}
-  {
-    expression: self.expression,
-    result: self.result
-  }
-end
+    {
+      expression: self.expression,
+      result: self.result
+    }
+  end
   
 end
