@@ -63,7 +63,7 @@ class Parser
     factor1
   end
   
-  # this method evaluates 'Tocken::Number | "(" expression ")"'
+  # this method evaluates 'Token::Number | "(" expression ")"'
   def number
     token = @lexer.get_next_token
 
@@ -76,7 +76,20 @@ class Parser
     else
       raise 'Not a Number'
     end
-
+    value = exponentiation value
+  end
+  
+  def exponentiation base
+    token = @lexer.get_next_token
+    
+    if token.get_kind_name == Token::Exponent # new sub-expression
+      exponent = number()
+      value = base**exponent
+    else
+      value = base
+      @lexer.revert
+    end
+    
     value
   end
 end

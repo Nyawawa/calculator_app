@@ -8,8 +8,12 @@ class Token
 
   LBracket  = 5
   RBracket  = 6
-
+  
   End       = 7
+
+  Exponent  = 8
+  
+  
 
   attr_accessor :kind_name
   attr_accessor :value #only needed for kind Number, in all other cases :value stays nil as initialized

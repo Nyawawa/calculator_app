@@ -13,6 +13,7 @@ class Calculator < ApplicationRecord
       puts "########## call parse"
       result = parser.parse(self.expression)
       puts "########## result = " + result.to_s
+      raise 'Infinity' if result.infinite?
       self.result = result
     rescue => e
       puts "########## error: (message) " + e.message + ", (to_s) " + e.to_s
