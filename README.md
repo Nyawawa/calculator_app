@@ -26,7 +26,7 @@ The service accepts an arithmetic expression added to the request as in the foll
 ```
 http://calculator?expression=3*4
 ```
-For usage of the Square root or exponentiation regard the following:
+For usage of Square root or exponentiation regard the following:
 
 If there is only a number following you can use it like this and leave parenthesis aside
 ```
