@@ -26,6 +26,11 @@ The service accepts an arithmetic expression added to the request as in the foll
 ```
 http://calculator?expression=3*4
 ```
+Negative numbers are supported and can be expressed through a leading minus operator (negative square roots are not supported!):
+```
+"-4", "5--3" => 2
+```
+
 For usage of Square root or exponentiation regard the following:
 
 If there is only a number following you can use it like this and leave parenthesis aside
