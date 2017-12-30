@@ -18,28 +18,28 @@ class Lexer
 
     case @input
       when /\A\+/ then # string "+"
-        token.set_kind_name Token::Plus
+        token.set_kind Token::Plus
       when /\A-/ then # string "-"
-        token.set_kind_name Token::Minus
+        token.set_kind Token::Minus
       when /\A\*/ then # string "*"
-        token.set_kind_name Token::Multiply
+        token.set_kind Token::Multiply
       when /\A\// then # string "/"
-        token.set_kind_name Token::Divide
+        token.set_kind Token::Divide
       when /\A\d+(\.\d+)?/ # string "1.2" (d.d)
-        token.set_kind_name Token::Number
+        token.set_kind Token::Number
         token.set_value $&.to_f # store the number (the last successful pattern match) as float 
       when /\A\(/ # string "("
-        token.set_kind_name Token::LBracket
+        token.set_kind Token::LBracket
       when /\A\)/ # string ")"
-        token.set_kind_name Token::RBracket
+        token.set_kind Token::RBracket
       when '' # empty string
-        token.set_kind_name Token::End
+        token.set_kind Token::End
       when /\A\^/ # string "^" 
-        token.set_kind_name Token::Exponent
+        token.set_kind Token::Exponent
       when /\Amod/ # string "mod"
-        token.set_kind_name Token::Modulo
+        token.set_kind Token::Modulo
       when /\Asqrt/ # string "sqrt"
-        token.set_kind_name Token::SquRoot
+        token.set_kind Token::SquRoot
         
     end
     raise 'Unknown Token' if token.unknown?

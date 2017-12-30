@@ -1,7 +1,7 @@
 class CalculatorController < ApplicationController
   def calculate
-    # using params[] "+" is replaced by " " so the original URL must be retrieved and parsed
-    queryString    = URI.parse(request.original_url).query
+    # using params[] "+" is replaced by " " so the original URL must be retrieved and parsed different
+    queryString = URI.parse(request.original_url).query
     expressionString = queryString.split("=")[1] # the service only exprects one argument, so the second part of the string should be the expression 
     if !expressionString.blank?
       @calculator = Calculator.new(:expression => expressionString)
