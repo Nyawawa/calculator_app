@@ -1,6 +1,7 @@
 # Calculator web-service
 
 The calculator_app is a service that works like a calculator using GET requests.
+
 An expression forwarded as argument by a GET request is evaluated using the following grammar:
 ```
 number     = {"0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"}
@@ -12,9 +13,8 @@ Supported operators:
 ```
 "/", "*", "mod", "+", "-", "^"
 
-```
 (mod is the replacement for the modulo operator %)
-
+```
 Supported functions:
 ```
 Square root: "sqrt"
@@ -27,6 +27,7 @@ The service accepts an arithmetic expression added to the request as in the foll
 http://calculator?expression=3*4
 ```
 For usage of the Square root or exponentiation regard the following:
+
 If there is only a number following you can use it like this and leave parenthesis aside
 ```
 "8^2" or "sqrt4"
