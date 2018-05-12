@@ -6,7 +6,7 @@ An expression forwarded as argument by a GET request is evaluated using the foll
 ```
 number     = {"0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"}
 factor     = (number | "(" expression ")" | "sqrt" factor) [{"^" factor}] 
-component  = factor [{("*" | "/") factor}]
+component  = factor [{("*" | "/" | "mod") factor}]
 expression = component [{("+" | "-") component}]
 ```
 Supported operators:
